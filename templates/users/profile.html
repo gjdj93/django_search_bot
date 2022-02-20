@@ -1,0 +1,53 @@
+{% extends "searchbot/index.html" %} {% block content %}
+<div class="container">
+    <a class="btn btn-primary" href="{% url 'searches:create' %}"
+        >Create New Search</a
+    >
+    <a href="{% url 'users:update' user.id %}" class="btn btn-secondary"
+        >Edit Profile</a
+    >
+    <a href="{% url 'users:change_password' %}" class="btn btn-secondary"
+        >Change Password</a
+    >
+    <h4>Existing Searches</h4>
+    {% if searches %}
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>URL</th>
+                    <th>Search Phrase</th>
+                    <th>Found</th>
+                    <th>Date Added</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in searches %}
+                <tr>
+                    <td>{{ s.name }}</td>
+                    <td>{{ s.url }}</td>
+                    <td>{{ s.phrase }}</td>
+                    <td>{{ s.found }} {{ s.date_found }}</td>
+                    <td>{{ s.date_added|date:"d/m/Y" }}</td>
+                    <td>
+                        <a href="{% url 'searches:view' s.id %}">View</a>
+                        <a href="{% url 'searches:update' s.id %}">Edit</a>
+                        <a href="{% url 'searches:delete' s.id %}?next=/users/"
+                            >Delete</a
+                        >
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p>
+        You don't have any searches. Why not
+        <a href="{% url 'searches:create' %}">create one?</a>
+    </p>
+    {% endif %}
+</div>
+{% endblock %}

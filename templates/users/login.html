@@ -1,0 +1,27 @@
+{% extends "searchbot/index.html" %} {% block content %}
+<div class="container">
+    <h2>Login</h2>
+    {% load crispy_forms_tags %}
+    <form method="post" action="">
+        {% csrf_token %} {{ login_form|crispy }}
+        <button class="btn btn-primary" type="submit">Login</button>
+    </form>
+    {% if login_form.errors %}
+        {% for field in login_form %}
+            {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+    <p>
+        If you can't remember your password,
+        <a href="{% url 'password_reset' %}">reset it here</a>.
+    </p>
+    <p>
+        If you don't have an account yet,
+        <a href="{% url 'users:register' %}">register</a> instead.
+    </p>
+</div>
+{% endblock %}

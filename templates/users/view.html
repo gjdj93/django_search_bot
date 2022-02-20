@@ -1,0 +1,7 @@
+{% if user %}
+    <h3>{{ user.firstname }} {{ user.lastname }}</h3>
+
+    {% for search in user.search_set.all %}
+        {{ search.name }}
+    {% endfor %}
+{% endif %}
