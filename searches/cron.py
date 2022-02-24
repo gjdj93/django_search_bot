@@ -16,7 +16,7 @@ def find_items():
             try:
                 page = urllib.request.urlopen(s.url)
                 soup = BeautifulSoup(page, features="html.parser")
-                if s.phrase in soup.text:
+                if s.phrase.lower() in soup.text.lower():
                     print(f"{s.phrase} found on {s.url}")
                 else:
                     print(f"{s.phrase} not found on {s.url}")

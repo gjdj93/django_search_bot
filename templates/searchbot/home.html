@@ -1,9 +1,18 @@
-{% extends "searchbot/index.html" %}
-
-{% block content %}
+{% extends "searchbot/index.html" %} {% block content %}
 <div class="container">
     <h2>Homepage</h2>
 
-    <p>homepage for app</p>
+    <p>Searching for when an item will be back in stock?</p>
+    <p>Leave it to Searchbot - we'll let you know!</p>
+
+    {% if not user.is_authenticated %}
+    <p>
+        <a class="btn btn-primary" href="{% url 'users:login' %}">Login</a> or
+        <a class="btn btn-primary" href="{% url 'users:register' %}"
+            >Register</a
+        >
+        to add a search item
+    </p>
+    {% endif %}
 </div>
 {% endblock %}

@@ -1,9 +1,28 @@
-{% extends "searchbot/index.html" %}
-
-{% block content %}
+{% extends "searchbot/index.html" %} {% block content %}
 <div class="container">
     <h2>About</h2>
 
-    <p>some info about the app</p>
+    <p>
+        This is an app created by Gregory Ottley using Python and Django to
+        check websites and see if items are available.
+    </p>
+
+    <p>
+        The code is designed to loop through a list of urls, check for a
+        specific phrase added by a user, and if that phrase is no longer there,
+        it assumes the item is now available.
+    </p>
+
+    <p>
+        If you want to know more, contact me at
+        <a href="mailto:hello@gregottley.co.uk">hello@gregottley.co.uk</a>
+    </p>
+
+    <p>
+        You can view the code for the project at
+        <a href="https://github.com/gjdj93/django_search_bot" target="_blank"
+            >Github</a
+        >
+    </p>
 </div>
 {% endblock %}
