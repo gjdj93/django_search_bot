@@ -12,6 +12,7 @@ from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
 from searches.models import Search
 from django.contrib.auth.models import User
 from django.views.generic.edit import UpdateView
+from .services import send_register_email
 
 # Create your views here.
 def index(request):
@@ -43,7 +44,7 @@ def register_request(request):
             user = form.save()
             login(request, user)
             messages.success(request, "Registration successful.")
-
+            send_register_email(user)
             return redirect("users:index")
         messages.error(request, "Registration invalid.")
     form = NewUserForm()
