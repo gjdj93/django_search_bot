@@ -10,7 +10,7 @@ from django.conf import settings
 
 def find_items():
     searches = Search.objects.all()
-
+    print(f"starting job: {timezone.now()}")
     for s in searches:
         if not s.found:
             try:

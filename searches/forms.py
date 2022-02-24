@@ -5,4 +5,4 @@ from .models import Search
 class SearchForm(ModelForm):
     class Meta:
         model = Search
-        fields = ("name", "url", "phrase", "date_found")
+        fields = ("name", "url", "phrase", "found")

@@ -1,5 +1,16 @@
 {% extends "searchbot/index.html" %} {% block content %}
 <div class="container">
     <h2>{{ search.name }}</h2>
+    <p>{{ search.url }}</p>
+    {% if search.found %}
+    <p>Item was found {{ search.date_found|date:"d/m/Y" }}</p>
+    {% else %}
+    <p>
+        Item has not yet been found. If you think this is incorrect,
+        <a href="{% url 'searches:found' s.id %}?next=/users/"
+            >mark the item as found</a
+        >.
+    </p>
+    {% endif %}
 </div>
 {% endblock %}

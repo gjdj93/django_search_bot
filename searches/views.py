@@ -4,6 +4,7 @@ from django.views.generic.edit import UpdateView
 from django.contrib import messages
 from .forms import SearchForm
 from .models import Search
+from django.utils import timezone
 
 # Create your views here.
 def index(request):
@@ -57,3 +58,15 @@ def delete(request, pk):
     search.delete()
     if "next" in request.GET:
         return redirect(request.GET["next"])
+
+
+def found(request, pk):
+    search = get_object_or_404(Search, pk=pk)
+    if not request.user.is_superuser and search.user != request.user:
+        raise PermissionDenied
+
+    search.found = True
+    search.date_found = timezone.now()
+    if "next" in request.GET:
+        return redirect(request.GET["next"])
+    return redirect("users:index")

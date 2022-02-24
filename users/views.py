@@ -8,7 +8,7 @@ from django.contrib.auth.forms import (
     PasswordChangeForm,
     PasswordResetForm,
 )
-from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
+from django.core.exceptions import PermissionDenied
 from searches.models import Search
 from django.contrib.auth.models import User
 from django.views.generic.edit import UpdateView
@@ -29,10 +29,7 @@ def view(request, pk):
     if not request.user.is_superuser:
         raise PermissionDenied
 
-    u = User.objects.get(id=pk)
-
-    if u is None:
-        raise ObjectDoesNotExist
+    u = get_object_or_404(User, pk=pk)
 
     return render(request, "users/view.html", context={"user": u})
 

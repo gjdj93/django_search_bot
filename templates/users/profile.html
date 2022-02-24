@@ -29,7 +29,7 @@
                     <td>{{ s.name }}</td>
                     <td>{{ s.url }}</td>
                     <td>{{ s.phrase }}</td>
-                    <td>{{ s.found }} {{ s.date_found }}</td>
+                    <td>{{ s.found }} {{ s.date_found|date:"d/m/Y" }}</td>
                     <td>{{ s.date_added|date:"d/m/Y" }}</td>
                     <td>
                         <a href="{% url 'searches:view' s.id %}">View</a>

@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import os
 import environ
-from datetime import datetime
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -33,8 +32,10 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = [
-    "www.searchbot.gregottley.co.uk",
+    "localhost",
+    "127.0.0.1",
     "searchbot.gregottley.co.uk",
+    "www.searchbot.gregottley.co.uk",
 ]
 
 
@@ -92,10 +93,10 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
         "NAME": env("MYSQL_DB"),
-	"USER": env("MYSQL_USER"),
-	"PASSWORD": env("MYSQL_PASS"),
-	"HOST": "localhost",
-	"PORT": "3306",
+        "USER": env("MYSQL_USER"),
+        "PASSWORD": env("MYSQL_PASS"),
+        "HOST": "localhost",
+        "PORT": "3306",
     }
 }
 

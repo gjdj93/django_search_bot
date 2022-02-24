@@ -1,7 +1,42 @@
-{% if user %}
+{% extends "searchbot/index.html" %} {% block content %}
+<div class="container">
     <h3>{{ user.firstname }} {{ user.lastname }}</h3>
 
-    {% for search in user.search_set.all %}
-        {{ search.name }}
-    {% endfor %}
-{% endif %}
+    <h4>User Searches</h4>
+    {% if user.search_set %}
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>URL</th>
+                    <th>Search Phrase</th>
+                    <th>Found</th>
+                    <th>Date Added</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in user.search_set.all %}
+                <tr>
+                    <td>{{ s.name }}</td>
+                    <td>{{ s.url }}</td>
+                    <td>{{ s.phrase }}</td>
+                    <td>{{ s.found }} {{ s.date_found|date:"d/m/Y" }}</td>
+                    <td>{{ s.date_added|date:"d/m/Y" }}</td>
+                    <td>
+                        <a href="{% url 'searches:view' s.id %}">View</a>
+                        <a href="{% url 'searches:update' s.id %}">Edit</a>
+                        <a href="{% url 'searches:delete' s.id %}?next=/users/"
+                            >Delete</a
+                        >
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p>This user doesn't have any searches.</p>
+    {% endif %} {% endblock %}
+</div>
