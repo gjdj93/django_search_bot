@@ -3,3 +3,7 @@
 __pycache__
 .vscode
 db.sqlite3
+logs
+stderr.log
+passenger_wsgi.py
+tmp

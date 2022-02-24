@@ -32,7 +32,10 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "www.searchbot.gregottley.co.uk",
+    "searchbot.gregottley.co.uk",
+]
 
 
 # Application definition
@@ -87,8 +90,12 @@ WSGI_APPLICATION = "searchbot.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": env("MYSQL_DB"),
+	"USER": env("MYSQL_USER"),
+	"PASSWORD": env("MYSQL_PASS"),
+	"HOST": "localhost",
+	"PORT": "3306",
     }
 }
 
@@ -128,6 +135,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -152,5 +160,6 @@ CRONJOBS = [
         "searches.cron.find_items",
         ">> {}".format(os.path.join(BASE_DIR, "logs/find_items.log")),
     ),
-    # ('0 8 * * *', 'searches.cron.find_items')
 ]
+
+CRONTAB_COMMAND_SUFFIX = "2>&1"
